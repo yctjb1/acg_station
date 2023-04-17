@@ -1,0 +1,1 @@
+1. 在泛型里加个 | null 就能给const定义的 ref里current赋值
