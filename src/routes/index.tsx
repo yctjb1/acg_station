@@ -11,6 +11,10 @@ import UIHome from "pages/DevHome/UIHome";
 import TestSkill from "pages/DevHome/TestSkill";
 import ErrorPage from "pages/ErrorPage";
 import NotFoundPage from "pages/ErrorPage/NotFoundPage";
+import SimpleList from "modules/index";
+import SimpleA from "modules/SimpleA";
+import SimpleB from "modules/SimpleB";
+import SimpleC from "modules/SimpleC";
 const TopRouter = () => {
     return (
         <Router>
@@ -20,6 +24,11 @@ const TopRouter = () => {
                 <Route path="/dev" element={<DevHome />}>
                     <Route path="ui" element={<UIHome />} />
                     <Route path="test_skill" element={<TestSkill />} />
+                </Route>
+                <Route path="/modules" element={<SimpleList />}>
+                    <Route path="SimpleA" element={<SimpleA />} />
+                    <Route path="SimpleB" element={<SimpleB />} />
+                    <Route path="SimpleC" element={<SimpleC />} />
                 </Route>
                 <Route path="*" element={<Navigate to="/error?code=404" />} />
                 <Route path="/error" element={<ErrorPage />}>
