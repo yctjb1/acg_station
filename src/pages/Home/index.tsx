@@ -1,13 +1,8 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
+import { SimplePageFrame } from "modules/Layout";
+
 const Home = () => {
-    const navigate = useNavigate();
-    return (
-        <div className="bg-blue-200 h-screen">
-            <Button variant="contained" onClick={() =>navigate("/modules")}>跳转SimpleList</Button>
-        </div>
-    );
+    return <SimplePageFrame>我是首页！！！</SimplePageFrame>;
 };
 
 export default Home;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-
+import { SimplePageFrame } from "modules/Layout"
 const DevHome = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -10,7 +10,7 @@ const DevHome = () => {
             navigate("ui");
         }
     }, [])
-    return <div>
+    return <SimplePageFrame>
         这里是开发相关路由，包含开发者笔记 、一些封装的组件demo展示
         <ul>
             <li><Link to="ui">ui的demo展示页</Link></li>
@@ -20,7 +20,7 @@ const DevHome = () => {
         <div>
             <Outlet/>
         </div>
-    </div>
+    </SimplePageFrame>
 }
 
 export default DevHome;

@@ -3,6 +3,7 @@ import qs from "qs";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { pageErrorCode } from "models/index"
+import { SimplePageFrame } from "modules/Layout"
 const ErrorPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -33,10 +34,10 @@ const ErrorPage = () => {
         navigate(url);
     };
     return (
-        <div>
+        <SimplePageFrame>
             {!errorCode ? "这里是错误页面根路由" : null}
             <Outlet />
-        </div>
+        </SimplePageFrame>
     );
 };
 export default ErrorPage;

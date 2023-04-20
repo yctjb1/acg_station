@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import TopRouter from 'routes/index'
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import styles from './App.module.less'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import { BrowserRouter as Router } from "react-router-dom";
+import TopRouter from "routes/index";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import styles from "./App.module.less";
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -37,13 +38,15 @@ import styles from './App.module.less'
 //   )
 // }
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
 
-  return (
-    <div className={`App ${styles.App}`}>
-      <TopRouter />
-    </div>
-  )
+    return (
+        <div className={`App ${styles.App}`}>
+            <Router>
+                <TopRouter />
+            </Router>
+        </div>
+    );
 }
 
-export default App
+export default App;
