@@ -1,1 +1,1 @@
-export * from './RecoilAtoms';
+export * from './recoil/index';

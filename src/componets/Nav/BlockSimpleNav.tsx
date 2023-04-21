@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Button from "@mui/material/Button";
 import { useLocation } from "react-router-dom";
 type Itheme = "dark0" | "light0";
@@ -14,36 +14,57 @@ interface IBlockSimpleNav {
     config?: {
         theme?: Itheme;
         activeKey?: "pathName" | string;
+        activeTypeStyle?: "underline"; // underline模式的activeColor只影响underline
+        activeColor?: "border-red-500";
     };
 }
-enum ThemeCss {
-    dark0 = "text-white bg-black",
-    light0 = "text-black bg-white",
+enum ThemeColor {
+    dark0 = "text-white",
+    light0 = "text-black",
+}
+enum ThemeBg {
+    dark0 = "bg-black",
+    light0 = "bg-white",
 }
 
 const BlockSimpleNav = (props: IBlockSimpleNav) => {
     const { dataSource = [], config } = props;
-    const { theme = "dark0", activeKey: configActiveKey = "" } = config || {};
-    const themeCss = ThemeCss[theme];
+    const {
+        theme = "dark0",
+        activeKey: configActiveKey = "",
+        activeTypeStyle = "underline",
+        activeColor = "border-red-500",
+    } = config || {};
+    const themeColor = ThemeColor[theme];
+    const themeBg = ThemeBg[theme];
     const location: any = useLocation();
     const pathname = location?.pathname || "";
 
+    const spanContentCss = useMemo(() => {
+        switch (activeTypeStyle) {
+            case "underline":
+                return activeColor;
+            default:
+                return activeColor;
+        }
+    }, [activeTypeStyle, activeColor]);
+
     const activeCss = (item: IBlockSimpleNavItem) => {
         if (configActiveKey === "pathName" && pathname.startsWith(item.url)) {
-            return "border-red-500";
+            return spanContentCss;
         }
         return "border-transparent";
     };
     return (
         <div className="z-50 px-4 bg-black acg_block_bg_simple_nav">
-            <div className="container mx-auto">
+            <div className="container">
                 <nav
-                    className={`flex items-center text-sm font-medium ${themeCss}`}
+                    className={`flex items-center text-sm text-center font-medium ${themeBg} ${themeColor}`}
                 >
                     {dataSource.map(
                         (item: IBlockSimpleNavItem, index: number) => (
                             <div
-                                className="group flex px-3 border-t-2 border-transparent -ml-3"
+                                className="group flex px-3 border-0 border-t-2 border-solid border-transparent"
                                 key={index}
                             >
                                 <a
@@ -51,9 +72,9 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
                                     className="group cursor-pointer"
                                 >
                                     <span
-                                        className={`inline-block py-2 border-b-2 ${activeCss(
+                                        className={`inline-block py-2 border-0 border-b-2 border-solid ${themeColor} ${activeCss(
                                             item
-                                        )} group-hover:border-red-500`}
+                                        )} group-hover:${spanContentCss}`}
                                         dangerouslySetInnerHTML={{
                                             __html: item.label,
                                         }}

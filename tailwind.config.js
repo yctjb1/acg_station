@@ -10,4 +10,9 @@ export default {
         extend: {},
     },
     plugins: [],
+    // https://mui.com/material-ui/guides/interoperability/#tailwind-css
+    corePlugins: {
+        preflight: false, //删除 Tailwind CSS 的预检样式，以便它可以改用 MUI 的预检样式
+    },
+    important: '#root',
 };

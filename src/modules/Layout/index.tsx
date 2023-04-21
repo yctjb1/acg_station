@@ -1,6 +1,6 @@
-import SimplePageFrame from './SimplePageFrame';
+import CommonFrameContainer from './CommonFrameContainer';
 
 
 export {
-    SimplePageFrame
+    CommonFrameContainer
 };
