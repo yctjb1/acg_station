@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Button from "@mui/material/Button";
 import { useLocation } from "react-router-dom";
+
 type Itheme = "dark0" | "light0";
 interface IBlockSimpleNavItem {
     label: string;
@@ -16,6 +17,7 @@ interface IBlockSimpleNav {
         activeKey?: "pathName" | string;
         activeTypeStyle?: "underline"; // underline模式的activeColor只影响underline
         activeColor?: "border-red-500";
+        hoverColor?: "group-hover:border-red-500";
     };
 }
 enum ThemeColor {
@@ -34,6 +36,7 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
         activeKey: configActiveKey = "",
         activeTypeStyle = "underline",
         activeColor = "border-red-500",
+        hoverColor = "group-hover:border-red-500",
     } = config || {};
     const themeColor = ThemeColor[theme];
     const themeBg = ThemeBg[theme];
@@ -53,7 +56,8 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
         if (configActiveKey === "pathName" && pathname.startsWith(item.url)) {
             return spanContentCss;
         }
-        return "border-transparent";
+
+        return `border-transparent ${hoverColor}`;
     };
     return (
         <div className="z-50 px-4 bg-black acg_block_bg_simple_nav">
@@ -64,7 +68,7 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
                     {dataSource.map(
                         (item: IBlockSimpleNavItem, index: number) => (
                             <div
-                                className="group flex px-3 border-0 border-t-2 border-solid border-transparent"
+                                className="flex px-3 border-0 border-t-2 border-solid border-transparent"
                                 key={index}
                             >
                                 <a
@@ -74,7 +78,7 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
                                     <span
                                         className={`inline-block py-2 border-0 border-b-2 border-solid ${themeColor} ${activeCss(
                                             item
-                                        )} group-hover:${spanContentCss}`}
+                                        )}`}
                                         dangerouslySetInnerHTML={{
                                             __html: item.label,
                                         }}

@@ -12,14 +12,14 @@ export const atomRoutes = atom<any>({
     default: [],
 });
 export const atomRoutesFilter = atom<
-    "meta-named" | "meta-all" | "flat-named" | "flat-all" | "flat-named-noerr"
+    "meta-named" | "meta-all" | "flat-named" | "flat-all" | "flat-named-noerr"|"meta-named-noerr"
 >({
     key: "atomRoutesFilter",
-    default: "meta-named",
+    default: "meta-named-noerr",
 });
 
 export const filteredAtomRoutes = selector({
-    key: "filteredTodoListState",
+    key: "filteredAtomRoutes",
     get: ({ get }) => {
         const filter = get(atomRoutesFilter);
         const routerList = get(atomRoutes);
@@ -50,6 +50,13 @@ export const filteredAtomRoutes = selector({
                 return (
                     routerList[0]?.children.filter(
                         (item: any) => !["/", "*"].includes(item.path)
+                    ) || []
+                );
+            case "meta-named-noerr":
+                return (
+                    routerList[0]?.children.filter(
+                        (item: any) => !["/", "*"].includes(item.path) &&
+                        !item.path.startsWith("/error")
                     ) || []
                 );
             case "meta-all":

@@ -24,7 +24,3 @@
  * your stylesheet by default.
  */
 @tailwind screens;
-
-body {
-    @apply m-0;
-}

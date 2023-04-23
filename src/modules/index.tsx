@@ -26,7 +26,7 @@ const SimpleList = () => {
                 {urlInfoList.map((item: IUrlInfoItem, index: number) => (
                     <Button
                         onClick={() => navigate(item.url)}
-                        className={`border-indigo-600  ${
+                        className={`border-indigo-600 ${
                             isActiveCss(item)
                                 ? "bg-indigo-600 text-white"
                                 : "bg-transparent text-indigo-600 hover:bg-indigo-100"
