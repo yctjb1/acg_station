@@ -6,6 +6,7 @@ import react from "@vitejs/plugin-react-swc";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: './',
     plugins: [
         alias({
             entries: [
@@ -25,4 +26,13 @@ export default defineConfig({
         ,
         react(),
     ],
+    server: {
+        proxy: {//vite的代理基于 http-proxy 实现
+            '/api': {
+                target: 'http://localhost:1337', // Sails 项目的地址和端口
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, '')
+            },
+        },
+    },
 });

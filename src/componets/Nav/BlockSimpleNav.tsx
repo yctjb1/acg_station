@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Button from "@mui/material/Button";
 import { useLocation } from "react-router-dom";
-
+import { atomRoutes } from "models/index";
+import { useRecoilValue } from "recoil";
 type Itheme = "dark0" | "light0";
 interface IBlockSimpleNavItem {
     label: string;
@@ -51,7 +52,7 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
                 return activeColor;
         }
     }, [activeTypeStyle, activeColor]);
-
+    const atomRoutesState = useRecoilValue(atomRoutes);
     const activeCss = (item: IBlockSimpleNavItem) => {
         if (configActiveKey === "pathName" && pathname.startsWith(item.url)) {
             return spanContentCss;
@@ -59,6 +60,9 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
 
         return `border-transparent ${hoverColor}`;
     };
+    const groupRedHover = "group-hover:border-red-500";
+    const groupHover = spanContentCss === "border-red-500" ? groupRedHover : "group-hover:border-blue-500";
+
     return (
         <div className="z-50 px-4 bg-black acg_block_bg_simple_nav">
             <div className="container">
@@ -78,7 +82,7 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
                                     <span
                                         className={`inline-block py-2 border-0 border-b-2 border-solid ${themeColor} ${activeCss(
                                             item
-                                        )}`}
+                                        )} ${groupHover} `}
                                         dangerouslySetInnerHTML={{
                                             __html: item.label,
                                         }}

@@ -1,4 +1,4 @@
-import React from "react";
+import SimpleCard from "componets/Card/SimpleCard";
 
 const SimpleC = () => {
     const Card = ({ children }: any) => (
@@ -21,24 +21,16 @@ const SimpleC = () => {
         </button>
     );
     return (
-        <div className="flex justify-center">
-            <div className="w-1/3">
-                <Card>
-                    <CardTitle>Card Title</CardTitle>
-                    <CardBody>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Sed imperdiet, diam id blandit placerat,
-                            sapien sapien rutrum tellus, sed commodo ipsum
-                            mauris at tellus.
-                        </p>
-                    </CardBody>
-                    <CardFooter>
-                        <Button>Read More</Button>
-                    </CardFooter>
-                </Card>
-            </div>
-        </div>
+        <SimpleCard
+            cardTitle={<span>Card Title</span>}
+            cardFooter={<Button>Read More</Button>}>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit. Sed imperdiet, diam id blandit placerat,
+                sapien sapien rutrum tellus, sed commodo ipsum
+                mauris at tellus.
+            </p>
+        </SimpleCard>
     );
 };
 

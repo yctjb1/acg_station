@@ -1,5 +1,6 @@
 import React from "react";
 import { HomePageTopNav } from "modules/PageNav";
+import FilingFooter from '../FilingFooter'
 interface ISimplePageFrameProps {
     children: React.ReactNode;
     // 其他属性
@@ -14,7 +15,10 @@ const SimplePageFrame: React.FC<ISimplePageFrameProps> = ({
     return (
         <div className="acg_simple_page_frame h-screen">
             {topNav ? topNav === "default" ? <HomePageTopNav /> : topNav : null}
-            {children}
+            <div className="frame_container px-[8px]">
+                {children}
+            </div>
+            <FilingFooter />
         </div>
     );
 };

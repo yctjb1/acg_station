@@ -13,6 +13,10 @@ import UIHome from "pages/DevHome/UIHome";
 import TestSkill from "pages/DevHome/TestSkill";
 import ErrorPage from "pages/ErrorPage";
 import NotFoundPage from "pages/ErrorPage/NotFoundPage";
+import Login from "pages/Login";
+import Setting from "pages/Setting";
+import Zone from "pages/Zone";
+import { Group, GroupList, GroupDetail } from "pages/Group";
 import SimpleList from "modules/index";
 import SimpleA from "modules/SimpleA";
 import SimpleB from "modules/SimpleB";
@@ -38,6 +42,48 @@ const TopRouter = () => {
                     path: "/home",
                     name: "首页",
                     element: <Home />,
+                },
+                {
+                    path: "/login",
+                    name: "登陆",
+                    element: <Login mode="login" />,
+                },
+                {
+                    path: "/setting",
+                    name: "设置",
+                    element: <Setting mode="setting" />,
+                },
+                {
+                    path: "/newpassword",
+                    name: "修改密码",
+                    element: <Setting mode="newpwd" />,
+                },
+                {
+                    path: "/register",
+                    name: "注册",
+                    element: <Login mode="register" />,
+                },
+                {
+                    path: "/zone/:nameplate",
+                    name: "空间",
+                    element: <Zone />,
+                },
+                {
+                    path: "/group",
+                    name: "部落",
+                    element: <Group />,
+                    children: [
+                        {
+                            path: "list",
+                            name: "部落列表",
+                            element: <GroupList />,
+                        },
+                        {
+                            path: ":groupId",
+                            name: "部落详情",
+                            element: <GroupDetail />,
+                        },
+                    ],
                 },
                 {
                     path: "/dev",
