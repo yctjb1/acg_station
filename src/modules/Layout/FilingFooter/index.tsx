@@ -19,7 +19,7 @@ const FilingFooter = () => {
                     devwolf的v2ex</a>
                 <a
                     className="no-underline text-sm text-white hover:underline underline-offset-4"
-                    href="//github.com/yctjb1" target="_blank" >
+                    href="//github.com/yctjb1/acg_station/tree/feature/1.0.0" target="_blank" >
                     项目的github</a>
             </Stack>
 
