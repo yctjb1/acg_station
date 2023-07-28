@@ -11,7 +11,7 @@ export const userSignUp = ({
     userPwd: string,
     verifyVal: string
 }): Promise<AxiosResponse<ICommonResponse>> => {
-    return axios.post(`${DEFAULT_API}/api/v1/user/signup`, {
+    return axios.post(`${DEFAULT_API}/v1/user/signup`, {
         userEmail,
         userPwd,
         verifyVal
@@ -33,14 +33,14 @@ export const userLogin = ({
 }): Promise<AxiosResponse<ICommonResponse>> => {
     if (loginCode) {
 
-        return axios.post(`${DEFAULT_API}/api/v1/oauth/autoLogin`, {
+        return axios.post(`${DEFAULT_API}/v1/oauth/autoLogin`, {
             loginEmail: userEmail,
             loginName: userName,
             loginCode, session_id
         })
     }
     else {
-        return axios.post(`${DEFAULT_API}/api/v1/user/login`, {
+        return axios.post(`${DEFAULT_API}/v1/user/login`, {
             userName, userEmail, userPwd
         })
     }
@@ -54,7 +54,7 @@ export const userBaseInfo = ({
     nameplate?: string,
 }): Promise<AxiosResponse<ICommonResponse>> => {
 
-    return axios.get(`${DEFAULT_API}/api/v1/oauth/getInfo`, {
+    return axios.get(`${DEFAULT_API}/v1/oauth/getInfo`, {
         params: {
             nameplate,
             userNickName,
@@ -67,7 +67,7 @@ export const userLogout = ({
 }: {
     session_id: string,
 }): Promise<AxiosResponse<ICommonResponse>> => {
-    return axios.get(`${DEFAULT_API}/api/v1/oauth/logout`, {
+    return axios.get(`${DEFAULT_API}/v1/oauth/logout`, {
         params: {
             session_id,
         },
@@ -84,7 +84,7 @@ export const userSetting = ({
     newNickName?: string,
     sessionId: string,
 }): Promise<AxiosResponse<ICommonResponse>> => {
-    return axios.post(`${DEFAULT_API}/api/v1/oauth/updateBase`, {
+    return axios.post(`${DEFAULT_API}/v1/oauth/updateBase`, {
         userId,
         newUserName,
         newNickName,
@@ -96,7 +96,7 @@ export const userNewPwd = ({
 }: {
     userEmail: string, userPwd: string, verifyVal: string
 }): Promise<AxiosResponse<ICommonResponse>> => {
-    return axios.post(`${DEFAULT_API}/api/v1/oauth/newpwd`, {
+    return axios.post(`${DEFAULT_API}/v1/oauth/newpwd`, {
         userEmail, userPwd, verifyVal
     })
 };
@@ -105,7 +105,7 @@ export const userSession = ({
 }: {
     session_id: string, type: "sync_db" | any;
 }): Promise<AxiosResponse<ICommonResponse>> => {
-    return axios.post(`${DEFAULT_API}/api/v1/user/session`, {
+    return axios.post(`${DEFAULT_API}/v1/user/session`, {
         session_id, type
     })
 };

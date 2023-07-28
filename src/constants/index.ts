@@ -1,7 +1,7 @@
 export const DEFAULT_NAME = 'acg_station';
 export const CREATOR_CN = '独傲的野狼';
 export const CREATOR_EN = 'devwolf';
-export const DEFAULT_API = '/api';
+export const DEFAULT_API = 'http://localhost:1337/api';
 export interface ICommonResponse {
     res: {
         data: {

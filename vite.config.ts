@@ -31,7 +31,7 @@ export default defineConfig({
             '/api': {
                 target: 'http://localhost:1337', // Sails 项目的地址和端口
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/api/, '')
+                rewrite: (path) => path.replace("http://localhost:1337", '')
             },
         },
     },
