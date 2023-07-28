@@ -6,7 +6,7 @@ a try, use vite + material-ui + tailwind + recoil, to make a comic catalogue and
 备注：vite的打包不能直接运行，需要npm install -g serve ，安装服务器环境。 接着输入serve -s dist，即可运行代码
 
 # 如何与sails.js对接？
-前端在5173端口上，而sails.js后端在1337端口上。
+前端在一个端口上，而sails.js后端在另一个端口上。
 
 # 正在处理的问题：
 目前的路由结构CommonFrameContainer会渲染2次。需要整改路由————不需要整改，原因是开了严格模式。
