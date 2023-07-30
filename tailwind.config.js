@@ -11,7 +11,7 @@ export default {
             black: colors.black,
             white: colors.white,
             slate: colors.slate, // 灰蓝色
-            gray: colors.trueGray, // 灰色
+            gray: colors.neutral, // 灰色
             zinc: colors.zinc, // 灰白色
             neutral: colors.neutral, // 中性色?
             stone: colors.stone, // 灰褐色

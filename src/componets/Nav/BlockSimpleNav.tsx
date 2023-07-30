@@ -54,7 +54,7 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
     }, [activeTypeStyle, activeColor]);
     const atomRoutesState = useRecoilValue(atomRoutes);
     const activeCss = (item: IBlockSimpleNavItem) => {
-        if (configActiveKey === "pathName" && pathname.startsWith(item.url)) {
+        if (configActiveKey === "pathName" && pathname.startsWith(`${item.url}`)) {
             return spanContentCss;
         }
 
@@ -62,7 +62,6 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
     };
     const groupRedHover = "group-hover:border-red-500";
     const groupHover = spanContentCss === "border-red-500" ? groupRedHover : "group-hover:border-blue-500";
-
     return (
         <div className="z-50 px-4 bg-black acg_block_bg_simple_nav">
             <div className="container">
@@ -76,7 +75,7 @@ const BlockSimpleNav = (props: IBlockSimpleNav) => {
                                 key={index}
                             >
                                 <a
-                                    href={item.url}
+                                    href={`${item.url}`}
                                     className="group cursor-pointer"
                                 >
                                     <span

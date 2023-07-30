@@ -6,10 +6,10 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 const Group = () => {
     const navigate = useNavigate();
     useEffect(() => {
-        const pathname = location.pathname;
-        if (pathname === "/group") {
-            navigate("/group/list");
-        }
+        // const pathname = location.pathname;
+        // if (pathname === "/web/group") {
+        //     navigate("/web/group/list");
+        // }
     }, [])
     return <Outlet />
 }

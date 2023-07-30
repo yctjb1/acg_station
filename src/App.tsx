@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Navigate } from "react-router-dom";
 import TopRouter from "routes/index";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";

@@ -25,9 +25,9 @@ import { atomRoutes } from "models/index";
 import { useSetRecoilState } from "recoil";
 import { CommonFrameContainer } from "modules/Layout";
 const TopRouter = () => {
-    const routes = [
+    const webRoutes = [
         {
-            path: "/",
+            path: "",
             element: (
                 <CommonFrameContainer>
                     <Outlet />
@@ -35,41 +35,42 @@ const TopRouter = () => {
             ),
             children: [
                 {
-                    path: "/",
-                    element: <Navigate to="/home" />,
+                    // path: "/",
+                    index: true,
+                    element: <Navigate to="/web/home" />,
                 },
                 {
-                    path: "/home",
+                    path: "home",
                     name: "首页",
                     element: <Home />,
                 },
                 {
-                    path: "/login",
+                    path: "login",
                     name: "登陆",
                     element: <Login mode="login" />,
                 },
                 {
-                    path: "/setting",
+                    path: "setting",
                     name: "设置",
                     element: <Setting mode="setting" />,
                 },
                 {
-                    path: "/newpassword",
+                    path: "newpassword",
                     name: "修改密码",
                     element: <Setting mode="newpwd" />,
                 },
                 {
-                    path: "/register",
+                    path: "register",
                     name: "注册",
                     element: <Login mode="register" />,
                 },
                 {
-                    path: "/zone/:nameplate",
+                    path: "zone/:nameplate",
                     name: "空间",
                     element: <Zone />,
                 },
                 {
-                    path: "/group",
+                    path: "group",
                     name: "部落",
                     element: <Group />,
                     children: [
@@ -86,7 +87,7 @@ const TopRouter = () => {
                     ],
                 },
                 {
-                    path: "/dev",
+                    path: "dev",
                     name: "开发者",
                     element: <DevHome />,
                     children: [
@@ -103,7 +104,7 @@ const TopRouter = () => {
                     ],
                 },
                 {
-                    path: "/modules",
+                    path: "modules",
                     name: "模块样板",
                     element: <SimpleList />,
                     children: [
@@ -125,7 +126,7 @@ const TopRouter = () => {
                     ],
                 },
                 {
-                    path: "/error",
+                    path: "error",
                     name: "错误中心",
                     element: <ErrorPage />,
                     children: [
@@ -138,11 +139,143 @@ const TopRouter = () => {
                 },
                 {
                     path: "*",
-                    element: <Navigate to="/error?code=404" />,
+                    element: <Navigate to="/web/error?code=404" />,
                 },
             ],
         },
     ];
+
+    const routes = [{
+        path: "/",
+        element: (
+            <CommonFrameContainer>
+                <Outlet />
+            </CommonFrameContainer>
+        ),
+        children: [
+            {
+                path: "/", // 次级路由的话，path: "/", path: "", index:true 这三种表示都可以
+                element: <Navigate to="/web/home" replace={true} />, // 根路由重定向到 /web/home
+            },
+            {
+                path: "/web",// 打包问题，子路由写绝对别写相对
+                children: [
+                    {
+                        path: "",// 但是这里只能 path: "" 或 index:true 这三种表示都可以
+                        element: <Navigate to="/web/home" />,
+                    },
+                    {
+                        path: "/web/home",
+                        name: "首页",
+                        element: <Home />,
+                    },
+                    {
+                        path: "/web/login",
+                        name: "登陆",
+                        element: <Login mode="login" />,
+                    },
+                    {
+                        path: "/web/setting",
+                        name: "设置",
+                        element: <Setting mode="setting" />,
+                    },
+                    {
+                        path: "/web/newpassword",
+                        name: "修改密码",
+                        element: <Setting mode="newpwd" />,
+                    },
+                    {
+                        path: "/web/register",
+                        name: "注册",
+                        element: <Login mode="register" />,
+                    },
+                    {
+                        path: "/web/zone/:nameplate",
+                        name: "空间",
+                        element: <Zone />,
+                    },
+                    {
+                        path: "/web/group",
+                        name: "部落",
+                        element: <Group />,
+                        children: [
+                            {
+                                path: "",
+                                element: <Navigate to="/web/group/list" />,
+                            },
+                            {
+                                path: "/web/group/list",
+                                name: "部落列表",
+                                element: <GroupList />,
+                            },
+                            {
+                                path: "/web/group/:groupId",
+                                name: "部落详情",
+                                element: <GroupDetail />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "/web/dev",
+                        name: "开发者",
+                        element: <DevHome />,
+                        children: [
+                            {
+                                path: "/web/dev/ui",
+                                name: "ui组件展示",
+                                element: <UIHome />,
+                            },
+                            {
+                                path: "/web/dev/test_skill",
+                                name: "功能组件展示",
+                                element: <TestSkill />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "/web/modules",
+                        name: "模块样板",
+                        element: <SimpleList />,
+                        children: [
+                            {
+                                path: "/web/modules/simple_a",
+                                name: "样板a",
+                                element: <SimpleA />,
+                            },
+                            {
+                                path: "/web/modules/simple_b",
+                                name: "样板b",
+                                element: <SimpleB />,
+                            },
+                            {
+                                path: "/web/modules/simple_c",
+                                name: "样板c",
+                                element: <SimpleC />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "/web/error",
+                        name: "错误中心",
+                        element: <ErrorPage />,
+                        children: [
+                            {
+                                path: "/web/error/404",
+                                name: "404",
+                                element: <NotFoundPage />,
+                            },
+                        ],
+                    },
+                ],
+
+            },
+            {
+                path: "*",
+                element: <Navigate to="/web/error?code=404" />,
+            },
+        ],
+    }
+    ]
     const routeList = useRoutes(routes);
     const setAtomRoutes = useSetRecoilState(atomRoutes);
     useEffect(() => {

@@ -79,7 +79,7 @@ const Zone = () => {
             .catch((error: any) => {
                 setErrorMsg(error)
                 setErrorOpen(true)
-                // navigate("/home")
+                // navigate("/web/home")
             }).finally(() => {
                 setReadMode(true)
             })
@@ -92,7 +92,7 @@ const Zone = () => {
                 cardTitle={<div className="my-[8px] flex justify-between">
                     <span>{nickName ? `${nickName}的空间` : "未找到该用户识别码或昵称"}</span>
                     {(Number(userInfo?.uuid) === Number(zoneUuid)) && <Fab color="secondary" aria-label="user-setting" size={"small"} variant={"circular"} onClick={() => {
-                        navigate("/setting")
+                        navigate("/web/setting")
                     }} title='用户设置' className='w-[36px] h-[36px] group'>
                         <ManageAccountsIcon className='inline-block group-hover:hidden' />
                         <span className='hidden group-hover:inline-block'>设置</span>

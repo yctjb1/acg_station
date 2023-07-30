@@ -6,7 +6,7 @@ const DevHome = () => {
     const navigate = useNavigate();
     useEffect(() => {
         const pathname = location.pathname;
-        // if (pathname === "/dev") {
+        // if (pathname === "/web/dev") {
         //     navigate("ui");
         // }
     }, [])

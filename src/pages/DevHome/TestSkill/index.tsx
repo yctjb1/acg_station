@@ -5,13 +5,12 @@ import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
-import { DEFAULT_API } from "constants/index";
-import axios from 'axios';
+import { axiosRequest } from "constants/index";
 
 const TestSkill = () => {
     const [demoData, setDemoData] = React.useState<string | undefined>(undefined);
     React.useEffect(() => {
-        axios.get(`${DEFAULT_API}/test`)
+        axiosRequest.get(`/test`)
             .then((res: any) => console.log(res))
             .catch((error: any) => console.error(error))
 

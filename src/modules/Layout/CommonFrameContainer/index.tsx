@@ -43,8 +43,8 @@ const CommonFrameContainer: React.FC<IFrameContainerProps> = ({
     const setSuccessMsg = useSetRecoilState(successMsg);
     const setErrorMsg = useSetRecoilState(errorMsg);
     const hiddenFloatingAB = [
-        "/login", "/newpassword", "/register"
-    ].includes(pathname) || pathname.startsWith("/dev") || pathname.startsWith("/modules");//特定路由下隐藏功能悬浮按钮
+        "/web/login", "/web/newpassword", "/web/register"
+    ].includes(pathname) || pathname.startsWith("/web/dev") || pathname.startsWith("/web/modules");//特定路由下隐藏功能悬浮按钮
     useEffect(() => {
         // 例子：特定路由下更换frameType
         // if(pathname.startsWith("/dev")){
@@ -72,8 +72,11 @@ const CommonFrameContainer: React.FC<IFrameContainerProps> = ({
                             if (errStatus === 0) {
                                 setUserInfo(extra);
                             } else {
-                                //免登验证失败时返回登录页面？
-                                navigate("/login");
+                                localStorage.removeItem("acghome_autoLogin");
+                                //免登验证失败目前只有setting需要返回【暂时】
+                                if (pathname === "/web/settting") {
+                                    navigate("/web/login");
+                                }
                             }
                         }
                     })
@@ -114,16 +117,16 @@ const CommonFrameContainer: React.FC<IFrameContainerProps> = ({
                 setErrorOpen(true)
             }).finally(() => {
                 // navigate("/home")
-                navigate("/login")
+                navigate("/web/login")
             })
     }, [userInfo.session_id])
     const GlobalComponents = <>
         {!hiddenFloatingAB && <FloatingActionButtons
             faceClick={() => {
-                navigate(`/zone/${userInfo.uuid}`)
+                navigate(`/web/zone/${userInfo.uuid}`)
             }}
             defaultUserId={userInfo.defaultUserId}
-            loginClick={() => navigate("/login")}
+            loginClick={() => navigate("/web/login")}
             logoutClick={() => handleLogout()}
         />}
         <SuccessMessage open={successOpen} handleClose={() => setSuccessOpen(false)} message={successMessage} />

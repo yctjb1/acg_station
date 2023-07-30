@@ -99,10 +99,10 @@ const CardContent = ({ mode }: { mode: string }) => {
                 try {
                     const { session_id } = JSON.parse(autoLogin || "{}");
                     if (!autoLogin || !session_id) {
-                        navigate("/home")
+                        navigate("/web/home")
                     }
                 } catch (e) {
-                    navigate("/home")
+                    navigate("/web/home")
                 }
             }
         }
@@ -163,7 +163,7 @@ const CardContent = ({ mode }: { mode: string }) => {
                             ...extra
                         }));
                         setUserInfo(extra);
-                        navigate(`/setting`);
+                        navigate(`/web/setting`);
                     } else {
                         setErrorMsg(message)
                         setErrorOpen(true)
@@ -228,7 +228,7 @@ const CardContent = ({ mode }: { mode: string }) => {
                         setSuccessMsg(`${message}，请重新登录！`)
                         setSuccessOpen(true)
                         commonLogout(userInfo.session_id)
-                        navigate("/login")
+                        navigate("/web/login")
                     } else {
                         setErrorMsg(message)
                         setErrorOpen(true)
@@ -419,7 +419,7 @@ const Setting = ({
             <SimpleCard
                 cardTitle={<div className="my-[8px]">
                     {titleType}
-                    {mode === "newpwd" && <Button variant="text" className="mr-[8px]" onClick={() => navigate(`/login`)}>登录</Button>}
+                    {mode === "newpwd" && <Button variant="text" className="mr-[8px]" onClick={() => navigate(`/web/login`)}>登录</Button>}
                 </div>}
                 cardFooter={null}
             >

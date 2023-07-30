@@ -3,7 +3,9 @@ a try, use vite + material-ui + tailwind + recoil, to make a comic catalogue and
 目标：功能方便，打算弄个漫画目录（表的），主页的话练练tailwind和material-ui，就参考https://www.jpl.nasa.gov/的网站了
 
 后端用sails，因为考虑学习websocket，可以先整个在线聊天室
-备注：vite的打包不能直接运行，需要npm install -g serve ，安装服务器环境。 接着输入serve -s dist，即可运行代码
+备注：vite的打包不能直接运行，需要npm install -g serve ，安装服务器环境。 接着输入serve -s dist -l 5173，即可运行代码(服务器上是80)
+
+关于打包后前端路由丢失以及刷新白页、以及serve.json的问题，翻阅同目录下的`devwolfNodeBook.md`文件
 
 # 如何与sails.js对接？
 前端在一个端口上，而sails.js后端在另一个端口上。

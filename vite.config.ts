@@ -6,7 +6,7 @@ import react from "@vitejs/plugin-react-swc";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: './',
+    base: '/',
     plugins: [
         alias({
             entries: [
@@ -31,7 +31,7 @@ export default defineConfig({
             '/api': {
                 target: 'http://localhost:1337', // Sails 项目的地址和端口
                 changeOrigin: true,
-                rewrite: (path) => path.replace("http://localhost:1337", '')
+                // rewrite: (path) => path.replace("http://www.acg-home.cn/api", '')
             },
         },
     },

@@ -13,7 +13,7 @@ const GroupList = () => {
 
             <div>
                 这里是部落列表，<a onClick={() => {
-                    navigate("/group/1")
+                    navigate("/web/group/1")
                 }}>去部落1</a>
             </div>
         </div>

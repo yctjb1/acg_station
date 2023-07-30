@@ -15,8 +15,8 @@ export const HomePageTopNav = () => {
     const [atomRoutesFilterState, setAtomRoutesFilter] =
         useRecoilState(atomRoutesFilter);
     const {
-        filteredAtomRoutesState,
-        filterAllAtomRoutesState
+        navAtomRoutesState,
+        filterAllAtomRoutesState,
     } = useRecoilValue(filteredAtomRoutes);
     const location: any = useLocation();
     const pathname = location?.pathname || "";
@@ -24,16 +24,17 @@ export const HomePageTopNav = () => {
     const { groupId, nameplate } = useParams();
     useEffect(() => {
         const titlesObj: any = { ...filterAllAtomRoutesState };
-        if (groupId) titlesObj[`/group/${groupId}`] = filterAllAtomRoutesState["/group/:groupId"];
-        if (nameplate) titlesObj[`/zone/${nameplate}`] = filterAllAtomRoutesState["/zone/:nameplate"];
+        if (groupId) titlesObj[`/web/group/${groupId}`] = filterAllAtomRoutesState["/web/group/:groupId"];
+        if (nameplate) titlesObj[`/web/zone/${nameplate}`] = filterAllAtomRoutesState["/web/zone/:nameplate"];
         if (titlesObj[pathname]) {
             setPageTitle(`${titlesObj[pathname]}-狼堡小站`)
         }
+
     }, [filterAllAtomRoutesState, pathname, groupId, nameplate])
     return (
         <>
             <BlockSimpleNav
-                dataSource={filteredAtomRoutesState.map(
+                dataSource={navAtomRoutesState.map(
                     (item: { path: string; name: string; element: any }) => ({
                         label: item.name,
                         url: item.path,

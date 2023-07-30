@@ -138,7 +138,7 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
                         setSuccessMsg("注册成功！");
                         setSuccessOpen(true);
                         sessionStorage.setItem("signupEmail", userEmail)
-                        navigate("/login");
+                        navigate("/web/login");
                     } else {
                         setErrorMsg(message)
                         setErrorOpen(true)
@@ -180,7 +180,7 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
                             ...extra
                         }));
                         setUserInfo(extra);
-                        navigate(`/zone/${extra.uuid}`)
+                        navigate(`/web/zone/${extra.uuid}`)
                     } else {
                         setErrorMsg(message)
                         setErrorOpen(true)
@@ -190,6 +190,7 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
                 .catch((error: any) => {
                     setErrorMsg(error)
                     setErrorOpen(true)
+                    console.log("我进来了")
                 })
         }
     }
@@ -316,16 +317,16 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
                 }}>{countdown != -1 ? countdown + "s" : "发送验证码"}</Button>
                 <Box>
 
-                    <Button variant="text" className="mr-[8px]" onClick={() => navigate(`/login`)}>登录</Button>
+                    <Button variant="text" className="mr-[8px]" onClick={() => navigate(`/web/login`)}>登录</Button>
                     <Button variant="contained" onClick={() => handleSignUp()}>注册</Button>
                 </Box>
             </div>}
             {mode === "login" && <div className="w-[588px] flex justify-between">
                 <Button variant="text" onClick={() => {
                     if (userType === "email" && regexpEmail.test(loginName)) {
-                        navigate(`/newpassword?userEmail=${loginName}`);
+                        navigate(`/web/newpassword?userEmail=${loginName}`);
                     } else {
-                        navigate(`/newpassword`);
+                        navigate(`/web/newpassword`);
                     }
                 }}>忘记密码</Button>
                 <Box>
@@ -334,7 +335,7 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
                         handleLogin()
                     }}>登陆</Button>
                     <Button variant="text" onClick={() => {
-                        navigate(`/register`);
+                        navigate(`/web/register`);
                     }}>注册</Button>
                 </Box>
             </div>}
