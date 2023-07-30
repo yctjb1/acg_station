@@ -20,3 +20,8 @@ serve.json和dist文件夹同级
     "trailingSlash": true
 }
 不过，问题的重点不是serve.json，还是上面改base
+
+# 5.github提交
+GsouCloud的代理是走的17890端口，所以出现`fatal: unable to access 'https://github.com/yctjb1/acg_station.git/': Failed to connect to github.com port 443: Timed out`的时候添加下面两段
+git config --global http.proxy http://127.0.0.1:17890
+git config --global https.proxy http://127.0.0.1:17890
