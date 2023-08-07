@@ -25,3 +25,8 @@ serve.json和dist文件夹同级
 GsouCloud的代理是走的17890端口，所以出现`fatal: unable to access 'https://github.com/yctjb1/acg_station.git/': Failed to connect to github.com port 443: Timed out`的时候添加下面两段
 git config --global http.proxy http://127.0.0.1:17890
 git config --global https.proxy http://127.0.0.1:17890
+
+# 6.sails.io.js
+https://stackoverflow.com/questions/76745851/sails-io-js-with-svelte3-4-sveltekit
+https://blog.csdn.net/solocao/article/details/111406820
+sails.io.js 仅适用于  socket.io-client@2.3.0 【注意：应该是2.3.0】

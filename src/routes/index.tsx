@@ -221,6 +221,10 @@ const TopRouter = () => {
                         element: <DevHome />,
                         children: [
                             {
+                                path: "",
+                                element: <Navigate to="/web/dev/test_skill" />,
+                            },
+                            {
                                 path: "/web/dev/ui",
                                 name: "ui组件展示",
                                 element: <UIHome />,
