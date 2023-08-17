@@ -23,10 +23,13 @@ import SimpleCard from "componets/Card/SimpleCard";
 import { regexpEmail, regexpPwd } from 'utils/index';
 import { emailSend, userSignUp, userLogin } from "constants/index"
 import { useNavigate } from "react-router-dom";
+import qs from 'qs';
 import MD5 from 'crypto-js/md5';
 
 const countdownLimit = 60;
 const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) => {
+    const queryParams = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+    const urlVCode = typeof (queryParams.verifyCode) === "string" ? queryParams.verifyCode : "";
     const userOptions = [{
         label: '邮箱', value: "email"
     }, {
@@ -44,7 +47,7 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
     const [userPwd, setUserPwd] = React.useState<string>("");
     const [pwdError, setPwdError] = React.useState<boolean>(false);
     const [userEmail, setUserEmail] = React.useState<string>("");
-    const [emailCode, setEmailCode] = React.useState<string>("");
+    const [emailCode, setEmailCode] = React.useState<string>(urlVCode);
     const [emailCodeError, setEmailCodeError] = React.useState<boolean>(false);
     const [emailError, setEmailError] = React.useState<boolean>(false);
     const [countdown, setCountDown] = React.useState<number>(-1);
@@ -190,7 +193,6 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
                 .catch((error: any) => {
                     setErrorMsg(error)
                     setErrorOpen(true)
-                    console.log("我进来了")
                 })
         }
     }

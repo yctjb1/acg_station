@@ -57,12 +57,12 @@ const FloatingActionButtons = (props: IFloatingActionButtons) => {
                 </Fab>
             }
             {/* 预留给聊天室 */}
-            <Fab aria-label="text-sms" disabled size={iconSize} variant={fabVariant} onClick={() => { }} title='发现' className='w-[36px] h-[36px]'>
+            {/* <Fab aria-label="text-sms" disabled size={iconSize} variant={fabVariant} onClick={() => { }} title='发现' className='w-[36px] h-[36px]'>
                 <TextsmsIcon />
             </Fab>
             <Fab aria-label="like" disabled size={iconSize} variant={fabVariant} onClick={() => { }} title='收藏' className='w-[36px] h-[36px]'>
                 <FavoriteIcon />
-            </Fab>
+            </Fab> */}
             <Fab aria-label="more" disabled size={iconSize} variant={fabVariant} title='更多' className='w-[36px] h-[36px]'>
                 <PendingIcon />
             </Fab>

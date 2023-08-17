@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { axiosRequest } from "constants/index";
 import socketIOClient from 'socket.io-client';
 import sailsIOClient from 'sails.io.js';
+//需要定义一足够抽象的房间表
 
 const TestSkill = () => {
     const [demoData, setDemoData] = React.useState<string | undefined>(undefined);
@@ -13,13 +14,15 @@ const TestSkill = () => {
         try {
             io.current = sailsIOClient(socketIOClient);
             io.current.sails.url = 'http://localhost:1337';
-
+            if (io.current.socket.isConnected()) {//?
+                io.current.socket.disconnect();
+            }
             io.current.sails.autoConnect = false;
             io.current.sails.reconnection = true;
 
             //io.current.sails.environment = 'production';// Disable logger in sails.io.js client
             socket.current = io.current.sails.connect();
-            socket.current.on('message', (msg) => {
+            socket.current.on('message', (msg: any) => {
                 console.log("【message】msg")
                 console.log(msg.action)
             });
@@ -67,8 +70,8 @@ const TestSkill = () => {
         <a href="http://bgm.tv" title="Bangumi 番组计划"><img src="http://bgm.tv/img/ico/bgm_banner.gif" alt="" /></a>
         <div>
             websocket<br />
-            <button onClick={() => {
-                subscribe()
+            <button disabled onClick={() => {
+                // subscribe()
             }}>subscribe</button>
             <button disabled onClick={() => {
                 // broadcast()

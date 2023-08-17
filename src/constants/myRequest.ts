@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 
 
-const DEFAULT_API = '/api';//本地
-// const DEFAULT_API = 'http://www.acg-home.cn/api';//线上
+// const DEFAULT_API = '/api';//本地
+const DEFAULT_API = 'http://www.acg-home.cn/api';//线上
 const axiosRequest = axios.create({
   baseURL: `${DEFAULT_API}`, // 设置请求的基本URL
   timeout: 5000, // 设置请求超时时间

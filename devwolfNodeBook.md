@@ -30,3 +30,7 @@ git config --global https.proxy http://127.0.0.1:17890
 https://stackoverflow.com/questions/76745851/sails-io-js-with-svelte3-4-sveltekit
 https://blog.csdn.net/solocao/article/details/111406820
 sails.io.js 仅适用于  socket.io-client@2.3.0 【注意：应该是2.3.0】
+
+# 7.解决部署后GET https://localhost:1337/__getcookie net::ERR_CONNECTION_CLOSED问题
+io.current.sails.useCORSRouteToGetCookie = false; 
+参考地址https://stackoverflow.com/questions/29440979/make-web-socket-connection-between-ionic-app-to-sails-api-with-sails-io-js/29455389?noredirect=1#comment47107883_29455389

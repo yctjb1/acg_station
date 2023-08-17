@@ -23,3 +23,5 @@ export const initUserInfo = {
 export * from './emailApi';
 export * from './userApi';
 export * from './myRequest';
+export * from './roomApi';
+export * from './commentApi';
