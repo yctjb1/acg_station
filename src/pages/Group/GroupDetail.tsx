@@ -71,6 +71,7 @@ const GroupDetail = () => {
     const [loading, setLoading] = useState(false);
     const [loginInfo, setLoginInfo] = useState<any>({});
     const [roomInfo, setRoomInfo] = useState<any>({});
+    const [lastMinorCtime, setLastMinorCtime] = useState<number>(0);
     const [favRoom, setFavRoom] = useState(false);
     const [mainText, setMainText] = useState<string>("");
     const [minorText, setMinorText] = useState<string>("");
@@ -113,8 +114,11 @@ const GroupDetail = () => {
 
                 try {
                     io.current = sailsIOClient(socketIOClient);
-                    io.current.sails.url = 'http://localhost:1337';
-                    io.current.sails.useCORSRouteToGetCookie = false;// 解决部署后GET https://localhost:1337/__getcookie net::ERR_CONNECTION_CLOSED问题
+                    // io.current.sails.url = 'ws://localhost:1337';
+                    // io.current.sails.url = 'http://localhost:1337';//【本地】
+                    io.current.sails.url = 'http://www.acg-home.cn:1337';//【线上】(换成域名后不能用socket.current.get)
+
+                    // io.current.sails.useCORSRouteToGetCookie = false;// 解决部署后GET https://localhost:1337/__getcookie net::ERR_CONNECTION_CLOSED问题
                     if (io.current.socket.isConnected()) {//?
                         io.current.socket.disconnect();
 
@@ -351,8 +355,14 @@ const GroupDetail = () => {
                         broadcast(extra.createdComment)
                         // getMinorComments()
                     } else {
-                        setErrorMsg(message)
-                        setErrorOpen(true)
+                        if (extra?.lastMinorCtime) {
+                            setLastMinorCtime(extra.lastMinorCtime)
+                            setErrorMsg(`${message}最后的发言时间为${dayjs(extra.lastMinorCtime).format('YYYY-MM-DD HH:mm:ss')}`)
+                            setErrorOpen(true)
+                        } else {
+                            setErrorMsg(message)
+                            setErrorOpen(true)
+                        }
                     }
                 }
             })
@@ -363,6 +373,23 @@ const GroupDetail = () => {
                 })
         }
 
+    }
+
+    const handleCommentKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, func: Function) => {
+        if (event.key === 'Enter') {
+            if (lastMinorCtime) {
+                const seconds = Math.trunc((lastMinorCtime + 60 * 1000 - Date.now()) / 1000)
+                if (seconds > 0) {
+                    setErrorMsg(`发言冷却还剩${seconds}秒`)
+                    setErrorOpen(true)
+                } else {
+                    func()
+                }
+            } else {
+                func()
+            }
+
+        }
     }
     const MainStage = () => {
         return <div className="w-3/4 border border-solid border-indigo-500 flex flex-col p-[4px]">
@@ -409,7 +436,13 @@ const GroupDetail = () => {
                     }}
                     onBlur={() => {
                         setMainText((_roomAbstract) => _roomAbstract?.trim()?.slice(0, 201))
-                    }} />
+                    }}
+                    onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
+                        if (event.key === 'Enter') {
+                            handleMainComment()
+                        }
+                    }}
+                />
                 <div className="inline-flex max-h-[40px]">
                     {<IconButton aria-label="add to favorites" onClick={() => handleMainComment()}>
                         <TextsmsIcon />
@@ -464,14 +497,16 @@ const GroupDetail = () => {
 
                     </div>
                     <div className="submit min-h-[200px] flex items-center">
-                        <Input placeholder="发言需登陆+订阅，暂限100字" style={{ margin: 8, flex: 1 }}
+                        <Input placeholder="发言需登录+订阅，暂限100字" style={{ margin: 8, flex: 1 }}
                             value={minorText}
                             onChange={(event: any) => {
                                 setMinorText(event.target.value.trim());
                             }}
                             onBlur={() => {
                                 setMinorText((_roomAbstract) => _roomAbstract?.trim()?.slice(0, 101))
-                            }} />
+                            }}
+                            onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => handleCommentKeyDown(event, handleMinorComment)}
+                        />
                         <div className="inline-flex max-h-[40px]">
                             {(isOwner || favRoom) ? <IconButton aria-label="add to favorites" onClick={() => handleMinorComment()}>
                                 <TextsmsIcon />

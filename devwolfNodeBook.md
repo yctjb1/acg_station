@@ -27,10 +27,13 @@ git config --global http.proxy http://127.0.0.1:17890
 git config --global https.proxy http://127.0.0.1:17890
 
 # 6.sails.io.js
-https://stackoverflow.com/questions/76745851/sails-io-js-with-svelte3-4-sveltekit
-https://blog.csdn.net/solocao/article/details/111406820
-sails.io.js 仅适用于  socket.io-client@2.3.0 【注意：应该是2.3.0】
+客户端应该与服务器保持一致，
+其中"sails.io.js": "^1.2.1",
+    "socket.io-client": "2.5.0"
 
 # 7.解决部署后GET https://localhost:1337/__getcookie net::ERR_CONNECTION_CLOSED问题
 io.current.sails.useCORSRouteToGetCookie = false; 
 参考地址https://stackoverflow.com/questions/29440979/make-web-socket-connection-between-ionic-app-to-sails-api-with-sails-io-js/29455389?noredirect=1#comment47107883_29455389
+然后io.current.sails.url = 'http://localhost:1337'改成io.current.sails.url = 'ws://localhost:1337'。（这个可能不改也行）
+有个报错是"WebSocket connection to 'ws://localhost:1337/socket.io/?__sails_io_sdk_version=1.2.1&__sails_io_sdk_platform=node&__sails_io_sdk_language=javascript&EIO=3&transport=websocket' failed: "这个初步判定是前后端插件版本不一致。前端的socket.io-client我之前是2.3.0，现在和后端一样是2.5.0了。
+【2023/08/18】真是不安生，睡了一夜又不行了。现在把io.current.sails.url的值从`http://localhost:端口号`改成了`http://域名:端口号`（因为问题解决了，于是io.current.sails.useCORSRouteToGetCookie = false我又注释掉了）

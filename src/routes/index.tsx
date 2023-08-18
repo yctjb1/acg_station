@@ -46,7 +46,7 @@ const TopRouter = () => {
                 },
                 {
                     path: "login",
-                    name: "登陆",
+                    name: "登录",
                     element: <Login mode="login" />,
                 },
                 {
@@ -171,7 +171,7 @@ const TopRouter = () => {
                     },
                     {
                         path: "/web/login",
-                        name: "登陆",
+                        name: "登录",
                         element: <Login mode="login" />,
                     },
                     {

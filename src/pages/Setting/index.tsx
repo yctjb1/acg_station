@@ -42,7 +42,7 @@ const CardContent = ({ mode }: { mode: string }) => {
     const aimNickName = typeof (queryParams.aimNickName) === "string" ? decodeURIComponent(queryParams.aimNickName) : "";
     const urlEmail = typeof (queryParams.userEmail) === "string" ? queryParams.userEmail : "";
     const urlVCode = typeof (queryParams.verifyCode) === "string" ? queryParams.verifyCode : "";
-    // 部分onBlur自动保存,用户名默认取userId。保存时检查是否符合当前者？进入时检查？后选方案：注册码作为访问凭证？或者登陆or免登成功后数据库手搓一个凭证?
+    // 部分onBlur自动保存,用户名默认取userId。保存时检查是否符合当前者？进入时检查？后选方案：注册码作为访问凭证？或者登录or免登成功后数据库手搓一个凭证?
     const [countdown, setCountDown] = React.useState<number>(-1);
     const [userName, setUserName] = React.useState<string | null>("");
     const [nickName, setNickName] = React.useState<string | null>("");

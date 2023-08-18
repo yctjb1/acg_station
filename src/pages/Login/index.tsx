@@ -206,7 +206,7 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={userType}
-                        label="登陆方式"
+                        label="登录方式"
                         onChange={(event: SelectChangeEvent) => {
                             setUserType(event.target.value as string);
                         }}
@@ -319,7 +319,6 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
                 }}>{countdown != -1 ? countdown + "s" : "发送验证码"}</Button>
                 <Box>
 
-                    <Button variant="text" className="mr-[8px]" onClick={() => navigate(`/web/login`)}>登录</Button>
                     <Button variant="contained" onClick={() => handleSignUp()}>注册</Button>
                 </Box>
             </div>}
@@ -335,10 +334,8 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
 
                     <Button variant="contained" onClick={() => {
                         handleLogin()
-                    }}>登陆</Button>
-                    <Button variant="text" onClick={() => {
-                        navigate(`/web/register`);
-                    }}>注册</Button>
+                    }}>登录</Button>
+
                 </Box>
             </div>}
         </div>
@@ -346,14 +343,26 @@ const CardContent = ({ mode, titleType }: { mode: string, titleType: string }) =
     </div>
 }
 
-//登陆和注册组件
+//登录和注册组件
 const Login = (props: { mode: "login" | "register" }) => {
     const { mode = "login" } = props;
-    const titleType = mode === "login" ? "登陆" : "注册";
+    const titleType = mode === "login" ? "登录" : "注册";
+    const navigate = useNavigate();
     return (
         <div className="flex flex-col my-[8px] mx-8">
             <SimpleCard
-                cardTitle={<div className="my-[8px]">{titleType}<span className="text-red-500">*(测试性开放)</span></div>}
+                cardTitle={<div className="my-[8px]">
+                    {titleType}
+                    <span className="text-red-500">*(测试性开放)</span>
+                    &nbsp;
+                    {
+                        mode === "login" ? <Button variant="text" onClick={() => {
+                            navigate(`/web/register`);
+                        }}>切换注册</Button>
+                            : <Button variant="text" className="mr-[8px]" onClick={() => navigate(`/web/login`)}>切换登录</Button>
+                    }
+
+                </div>}
                 cardFooter={null}
                 widthClassName={
                     mode === "login" ? "w-[638px]" : "w-[542px]"

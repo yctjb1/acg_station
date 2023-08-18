@@ -34,8 +34,7 @@ const Home = () => {
                 <h3>功能:</h3>
                 <ul>
                     <li>用户登录注册、然后就是建房聊天（数据我后有更新的时候随时会清空）。</li>
-                    <li>[2023/08/17]：裸辞快四个月咯，压力到了一个瓶颈，还好没跨，补充了点正能量后姑且解决了部署后"https://localhost:1337/__getcookie net::ERR_CONNECTION_CLOSED问题",
-                        需要io.current.sails.useCORSRouteToGetCookie = false;详情可以可以翻我github上前端项目里的笔记devwolfNodeBook.md</li>
+                    <li>[2023/08/18]：目前的技术栈组合将sails.io部署后出现很怪的问题，之前捣鼓的几个方案，初次部署没啥毛病，睡了一夜就各种问题——这会儿又解决了一版，笔记记录于github上前端项目里devwolfNodeBook.md</li>
                 </ul>
             </div>
         </div>
